@@ -45,5 +45,9 @@ scene.add(mesh)
 scene.add(camera)
 scene.add(axesHelper)
 
+
+// Setting the lookat
+camera.lookAt(mesh.position)
+
 // Render Scene
 renderer.render(scene, camera)
