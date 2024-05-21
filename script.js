@@ -7,16 +7,33 @@ const sizes = {
     height: 600
 }
 
+
+
 // Three.js variable set up
 const scene = new THREE.Scene()
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
 const geometry = new THREE.BoxGeometry(1,1,1)
 const material = new THREE.MeshBasicMaterial({color: 0xff0000})
 const mesh = new THREE.Mesh(geometry,material)
-mesh.position.y = 1
+
+// A different way to create a mesh
+
+const cube = new THREE.Mesh(
+    new THREE.BoxGeometry(1,1,1),
+    new THREE.MeshBasicMaterial({color: 0xff0000}) 
+)
+
+const cube2 = new THREE.Mesh(
+    new THREE.BoxGeometry(1,1,1),
+    new THREE.MeshBasicMaterial({color: 0xff0000}) 
+)
+
+const group = new THREE.Group()
 const renderer = new THREE.WebGLRenderer({
     canvas: canvasEl
 })
+
+
 // For visualizing the axess in 3D space
 const axesHelper = new THREE.AxesHelper(3)
 
@@ -32,22 +49,43 @@ camera.position.z = 3
 console.log(mesh.position.length())
 console.log(mesh.position.distanceTo(camera.position))
 console.log(mesh.position.normalize())
-mesh.position.set(0.7, -0.6, 1)
 
-// Playing with scale, rotation, and position
+//  Playing with scale, rotation, and position
+//  Always rotate the y first
+//  Setting positions, scale, and rotation for the 3 meshes
 mesh.scale.set(2,0.5,0.5)
-mesh.rotation.y = Math.PI * .75
-// Always rotate the y first
-mesh.position.z = -.5
+mesh.rotation.y = Math.PI
+mesh.rotation.z = Math.PI * .5
+cube.scale.set(2,0.5,0.5)
+cube.position.x = -1 
+cube.rotation.y = Math.PI
+cube.rotation.z = Math.PI * .5
+cube2.scale.set(2,0.5,0.5)
+cube2.position.x = 1 
+cube2.rotation.y = Math.PI
+cube2.rotation.z = Math.PI * .5
+
 
 // Add content to scene
-scene.add(mesh)
+scene.add(group)
 scene.add(camera)
 scene.add(axesHelper)
+group.add(mesh)
+group.add(cube)
+group.add(cube2)
+
+// Changing the group 
+
+group.position.y = 0 
+group.position.z = 2
+group.scale.x = .4
+group.scale.y = .4
+group.rotation.x = 2.5
+
 
 
 // Setting the lookat
-camera.lookAt(mesh.position)
+// camera.lookAt(mesh.position)
 
 // Render Scene
 renderer.render(scene, camera)
