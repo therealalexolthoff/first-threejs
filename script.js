@@ -17,6 +17,10 @@ mesh.position.y = 1
 const renderer = new THREE.WebGLRenderer({
     canvas: canvasEl
 })
+// For visualizing the axess in 3D space
+const axesHelper = new THREE.AxesHelper(3)
+
+
 
 
 
@@ -24,15 +28,22 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(sizes.width, sizes.height)
 camera.position.z = 3
 
-// Console logging a few important methods
+// Using  a few important methods
 console.log(mesh.position.length())
 console.log(mesh.position.distanceTo(camera.position))
 console.log(mesh.position.normalize())
 mesh.position.set(0.7, -0.6, 1)
 
+// Playing with scale, rotation, and position
+mesh.scale.set(2,0.5,0.5)
+mesh.rotation.y = Math.PI * .75
+// Always rotate the y first
+mesh.position.z = -.5
+
 // Add content to scene
 scene.add(mesh)
 scene.add(camera)
+scene.add(axesHelper)
 
 // Render Scene
 renderer.render(scene, camera)
