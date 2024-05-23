@@ -87,10 +87,28 @@ group.rotation.x = 2.5
 // Setting the lookat
 // camera.lookAt(mesh.position)
 
-// Setting up some animations
+// Setting up some animations\
+
+
+// Animation that is subject to change based on framerate of device
+const simpleRotation = () =>  {
+    group.rotation.y += .01
+}
+
+// Simple way to normalize framerate
+let time = Date.now()
+
 const tick = () => {
     
-    group.rotation.y += .1
+    
+    // simpleRotation()
+    
+
+    // Normalizing continued
+    const currentTime = Date.now()
+    const deltaTime = currentTime - time
+    time = currentTime
+    mesh.rotation.y += 0.01 * deltaTime
 
     // Render Scene
     renderer.render(scene, camera)
@@ -98,6 +116,8 @@ const tick = () => {
     // Run this function on the next frame (forever)
     window.requestAnimationFrame(tick)
 }
+
+
 tick()
 
 
