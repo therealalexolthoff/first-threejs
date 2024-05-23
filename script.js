@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-
+import gsap from 'gsap'
 // Non-three.js variable set up
 const canvasEl = document.querySelector('.webgl')
 const sizes = {
@@ -101,6 +101,9 @@ const simpleRotation = () =>  {
 // Three.js way to manage time
 const clock = new THREE.Clock()
 
+
+
+
 const tick = () => {
     
     
@@ -118,9 +121,12 @@ const tick = () => {
     group.rotation.y = elapsedTime
 
     // Using Cos and Sin for animation
-    group.position.x = Math.cos(elapsedTime)
-    group.position.y = Math.sin(elapsedTime)
-
+    // group.position.x = Math.cos(elapsedTime)
+    // group.position.y = Math.sin(elapsedTime)
+    
+    // Using GSAP to create a weird bouncing effect
+    gsap.to(group.position, { duration: 1, delay: 1, x: 1 })
+    gsap.to(group.position, { duration: 1, delay: 1, x: -1 })
 
     // Render Scene
     renderer.render(scene, camera)
