@@ -96,7 +96,10 @@ const simpleRotation = () =>  {
 }
 
 // Simple way to normalize framerate
-let time = Date.now()
+// let time = Date.now()
+
+// Three.js way to manage time
+const clock = new THREE.Clock()
 
 const tick = () => {
     
@@ -105,10 +108,19 @@ const tick = () => {
     
 
     // Normalizing continued
-    const currentTime = Date.now()
-    const deltaTime = currentTime - time
-    time = currentTime
-    mesh.rotation.y += 0.01 * deltaTime
+    // const currentTime = Date.now()
+    // const deltaTime = currentTime - time
+    // time = currentTime
+    // mesh.rotation.y += 0.01 * deltaTime
+
+    // Three.js way to normalize
+    const elapsedTime = clock.getElapsedTime()
+    group.rotation.y = elapsedTime
+
+    // Using Cos and Sin for animation
+    group.position.x = Math.cos(elapsedTime)
+    group.position.y = Math.sin(elapsedTime)
+
 
     // Render Scene
     renderer.render(scene, camera)
