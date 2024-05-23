@@ -87,5 +87,18 @@ group.rotation.x = 2.5
 // Setting the lookat
 // camera.lookAt(mesh.position)
 
-// Render Scene
-renderer.render(scene, camera)
+// Setting up some animations
+const tick = () => {
+    
+    group.rotation.y += .1
+
+    // Render Scene
+    renderer.render(scene, camera)
+
+    // Run this function on the next frame (forever)
+    window.requestAnimationFrame(tick)
+}
+tick()
+
+
+
