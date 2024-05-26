@@ -1,6 +1,4 @@
 import * as THREE from 'three'
-
-// import gsap from 'gsap'
 import { OrbitControls } from 'three/examples/jsm/Addons.js'
 // Non-three.js  set up
 
@@ -39,6 +37,15 @@ window.addEventListener('resize', () => {
     camera.updateProjectionMatrix()
     renderer.setSize(sizes.width, sizes.height)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+})
+
+window.addEventListener('dblclick', () => {
+    if (!document.fullscreenElement) {
+        canvasEl.requestFullscreen()
+    }
+    else {
+        document.exitFullscreen()
+    }
 })
 
 // const sizes = {
