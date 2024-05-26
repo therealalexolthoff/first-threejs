@@ -1,11 +1,22 @@
 import * as THREE from 'three'
 import gsap from 'gsap'
-// Non-three.js variable set up
+// Non-three.js  set up
+
 const canvasEl = document.querySelector('.webgl')
+const cursor = {
+    x: 0,
+    y: 0
+}
+
+window.addEventListener('mousemove', (e) => {
+    cursor.x = e.clientX / sizes.width - 0.5
+    cursor.y =  e.clientY / sizes.height - 0.5
+    console.log(cursor)
+})
 
 const sizes = {
-    width: 800,
-    height: 600
+    width: window.visualViewport.width,
+    height: window.visualViewport.height
 }
 
 
@@ -14,9 +25,9 @@ const sizes = {
 const scene = new THREE.Scene()
 
 // Playing with cameras
-// const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 1, 100)
-const aspectRatio = sizes.width / sizes.height
-const camera = new THREE.OrthographicCamera(-1 * aspectRatio,1 * aspectRatio,1,-1,0.1,100)
+const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
+// const aspectRatio = sizes.width / sizes.height
+// const camera = new THREE.OrthographicCamera(-1 * aspectRatio,1 * aspectRatio,1,-1,0.1,100)
 // More Three.js set up
 const geometry = new THREE.BoxGeometry(1,1,1)
 const material = new THREE.MeshBasicMaterial({color: 0xff0000})
@@ -49,7 +60,7 @@ const axesHelper = new THREE.AxesHelper(3)
 
 // Adjust size and positions
 renderer.setSize(sizes.width, sizes.height)
-camera.position.z = 3
+camera.position.z = 2.5
 
 // Using  a few important methods
 console.log(mesh.position.length())
@@ -86,7 +97,7 @@ group.position.y = 0
 group.position.z = 1
 group.scale.x = .4
 group.scale.y = .4
-group.rotation.x = 2.5
+// group.rotation.x = 2.5
 
 
 
@@ -124,15 +135,15 @@ const tick = () => {
 
     // Three.js way to normalize
     const elapsedTime = clock.getElapsedTime()
-    group.rotation.y = elapsedTime
+    // group.rotation.y = elapsedTime
 
     // Using Cos and Sin for animation
     // group.position.x = Math.cos(elapsedTime)
     // group.position.y = Math.sin(elapsedTime)
     
     // Using GSAP to create a weird bouncing effect
-    gsap.to(group.position, { duration: 1, delay: 1, x: 1 })
-    gsap.to(group.position, { duration: 1, delay: 1, x: -1 })
+    // gsap.to(group.position, { duration: 1, delay: 1, x: 1 })
+    // gsap.to(group.position, { duration: 1, delay: 1, x: -1 })
 
     // Render Scene
     renderer.render(scene, camera)
