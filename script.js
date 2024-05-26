@@ -10,7 +10,7 @@ const cursor = {
 
 window.addEventListener('mousemove', (e) => {
     cursor.x = e.clientX / sizes.width - 0.5
-    cursor.y =  e.clientY / sizes.height - 0.5
+    cursor.y = - (e.clientY / sizes.height - 0.5)
     console.log(cursor)
 })
 
@@ -108,9 +108,9 @@ group.scale.y = .4
 
 
 // Animation that is subject to change based on framerate of device
-const simpleRotation = () =>  {
-    group.rotation.y += .01
-}
+// const simpleRotation = () =>  {
+//     group.rotation.y += .01
+// }
 
 // Simple way to normalize framerate
 // let time = Date.now()
@@ -134,7 +134,7 @@ const tick = () => {
     // mesh.rotation.y += 0.01 * deltaTime
 
     // Three.js way to normalize
-    const elapsedTime = clock.getElapsedTime()
+    // const elapsedTime = clock.getElapsedTime()
     // group.rotation.y = elapsedTime
 
     // Using Cos and Sin for animation
@@ -145,6 +145,10 @@ const tick = () => {
     // gsap.to(group.position, { duration: 1, delay: 1, x: 1 })
     // gsap.to(group.position, { duration: 1, delay: 1, x: -1 })
 
+    // Cursor movement moves camera
+    camera.position.x = cursor.x * 3
+    camera.position.y = cursor.y * 3
+    camera.lookAt(group.position)
     // Render Scene
     renderer.render(scene, camera)
 
