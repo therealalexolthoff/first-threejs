@@ -2,6 +2,7 @@ import * as THREE from 'three'
 import gsap from 'gsap'
 // Non-three.js variable set up
 const canvasEl = document.querySelector('.webgl')
+
 const sizes = {
     width: 800,
     height: 600
@@ -13,8 +14,9 @@ const sizes = {
 const scene = new THREE.Scene()
 
 // Playing with cameras
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 1, 1000)
-
+// const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 1, 100)
+const aspectRatio = sizes.width / sizes.height
+const camera = new THREE.OrthographicCamera(-1 * aspectRatio,1 * aspectRatio,1,-1,0.1,100)
 // More Three.js set up
 const geometry = new THREE.BoxGeometry(1,1,1)
 const material = new THREE.MeshBasicMaterial({color: 0xff0000})
