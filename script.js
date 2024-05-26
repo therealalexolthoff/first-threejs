@@ -11,7 +11,11 @@ const sizes = {
 
 // Three.js variable set up
 const scene = new THREE.Scene()
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
+
+// Playing with cameras
+const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 1, 1000)
+
+// More Three.js set up
 const geometry = new THREE.BoxGeometry(1,1,1)
 const material = new THREE.MeshBasicMaterial({color: 0xff0000})
 const mesh = new THREE.Mesh(geometry,material)
@@ -77,7 +81,7 @@ group.add(cube2)
 // Changing the group 
 
 group.position.y = 0 
-group.position.z = 2
+group.position.z = 1
 group.scale.x = .4
 group.scale.y = .4
 group.rotation.x = 2.5
