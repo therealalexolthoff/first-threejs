@@ -1,3 +1,11 @@
-body {
+/* The following gurantees that the page displays only the canvas, and no swipping, scrolling, or anything else will show things beyond the canvas (assuming the canvas is set to full screen */
+html,body {
     margin: 0;
+    overflow: hidden;
+}
+.webgl{
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
 }

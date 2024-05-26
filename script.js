@@ -30,6 +30,17 @@ const sizes = {
     height: window.innerHeight
 }
 
+window.addEventListener('resize', () => {
+    // Update size of canvas when the screen resizes
+    sizes.width = window.innerWidth
+    sizes.height = window.innerHeight
+    const aspect = sizes.width / sizes.height
+    camera.aspect = aspect
+    camera.updateProjectionMatrix()
+    renderer.setSize(sizes.width, sizes.height)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+})
+
 // const sizes = {
 //     width: window.visualViewport.width,
 //     height: window.visualViewport.height
@@ -76,6 +87,7 @@ const axesHelper = new THREE.AxesHelper(3)
 
 // Adjust size and positions
 renderer.setSize(sizes.width, sizes.height)
+
 camera.position.z = 2.5
 
 // Using  a few important methods
